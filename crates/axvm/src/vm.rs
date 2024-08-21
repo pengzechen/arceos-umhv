@@ -108,7 +108,7 @@ impl<H: AxVMHal> AxVM<H> {
 
             // Setup Devices.
             // Todo:
-            let device_list = AxArchDeviceList::<H>::new();
+            let device_list = AxArchDeviceList::<H>::new(vcpu_list.clone());
 
             Self {
                 running: AtomicBool::new(false),

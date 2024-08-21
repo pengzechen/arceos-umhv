@@ -39,7 +39,7 @@ impl VmCpuRegisters {
 
 /// A virtual CPU within a guest
 #[derive(Clone, Debug)]
-pub struct VCpu<H: AxVMHal> {
+pub struct VCpu<H: AxVMHal  + ?Sized> {
     /// Vcpu context
     ctx: ContextFrame,
     host_stack_top: u64,

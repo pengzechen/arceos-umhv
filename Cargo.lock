@@ -603,6 +603,7 @@ name = "axvm"
 version = "0.1.0"
 dependencies = [
  "aarch64-cpu",
+ "arm_vgic",
  "axaddrspace",
  "axerrno 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "axhal 0.1.0 (git+https://github.com/arceos-hypervisor/arceos.git?rev=5c9ee79)",

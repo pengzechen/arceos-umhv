@@ -4,13 +4,17 @@ use axerrno::AxResult;
 
 use super::AxArchVCpuImpl;
 use crate::AxVMHal;
+use arm_vgic;
+use alloc::sync::Arc;
+use axvcpu::AxVCpu;
 
 pub struct AxArchDeviceList<H: AxVMHal> {
+    vgic: arm_vgic::Vgic<AxArchVCpuImpl<H>>,
     _marker: core::marker::PhantomData<H>,
 }
 
 impl<H: AxVMHal> AxArchDeviceList<H> {
-    pub fn new() -> Self {
+    pub fn new(list : Vec<Arc<AxVCpu<AxArchVCpuImpl<H>>>>) -> Self {
         let mut arch_vcpu_list = Vec::new();
 
         for arch_vcpu in list {
