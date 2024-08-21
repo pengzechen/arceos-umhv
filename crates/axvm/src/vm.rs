@@ -86,6 +86,9 @@ impl<H: AxVMHal> AxVM<H> {
                 // Todo: Perhaps we can merge the management of passthrough device memory
                 //       into the device configuration file.
                 if mapping_flags.contains(MappingFlags::DEVICE) {
+                    if mem_region.gpa == 0x800_0000 || mem_region.gpa == 0x801_0000 {
+                        continue;
+                    }
                     address_space.map_linear(
                         GuestPhysAddr::from(mem_region.gpa),
                         HostPhysAddr::from(mem_region.gpa),

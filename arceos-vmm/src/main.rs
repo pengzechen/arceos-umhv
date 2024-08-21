@@ -20,6 +20,13 @@ pub static mut AXVM_PER_CPU: AxVMPerCpu<AxVMHalImpl> = AxVMPerCpu::new_uninit();
 
 #[no_mangle]
 fn main() {
+    /* === temp init gic start ==== */
+    use arm_gic::GicDistributor;
+    use arm_gic::GicCpuInterface;
+    GicDistributor::init_base(0x800_0000 as * mut u8);
+    GicCpuInterface::init_base(0x801_0000 as * mut u8);
+    /* === temp init gic end ==== */
+    
     info!("Starting virtualization...");
 
     // TODO: remove this to somewhere else like `percpu.hardware_enable()`.

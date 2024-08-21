@@ -8,9 +8,9 @@ exclude = ["guest/nimbos"]
 lto = true
 
 [workspace.dependencies]
-axalloc = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "5c9ee79" }
-axhal = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "5c9ee79" }
-axstd = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "5c9ee79" }
+axalloc = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "fff3e9c" }
+axhal = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "fff3e9c" }
+axstd = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "fff3e9c" }
 axtask = { git = "https://github.com/arceos-org/arceos.git", branch = "monolithic" }
 
 axvm = { path = "./crates/axvm" }
@@ -25,8 +25,8 @@ emu_dev = { path = "./crates/emu_dev" }
 # (ref: https://github.com/arceos-org/arceos/blob/monolithic/modules/axtask/Cargo.toml)
 # we temporarily use [patch] here to unify the dependency versions of these modules.
 [patch."https://github.com/arceos-org/arceos.git"]
-axhal = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "5c9ee79" }
-axconfig = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "5c9ee79" }
+axhal = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "fff3e9c" }
+axconfig = { git = "https://github.com/arceos-hypervisor/arceos.git", rev = "fff3e9c" }
 
 # The complexity: 
 # `axstd` depends on the `axtask` from the `arceos-hypervisor\arceos` repository when the 'multitask' feature is enabled. 

@@ -33,6 +33,7 @@ axerrno = "0.1.0"
 memory_addr = "0.2.0"
 page_table_entry = { version = "0.3.3", features = ["arm-el2"] }
 percpu = { version = "0.1.4", features = ["arm-el2"] }
+arm_gic = { path = "../arceos/crates/arm_gic" }
 
 [target.'cfg(target_arch = "x86_64")'.dependencies]
 ## todo: use features to disable "irq" in riscv
