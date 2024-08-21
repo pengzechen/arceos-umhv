@@ -17,8 +17,8 @@ impl<H: AxVMHal> AxArchDeviceList<H> {
     pub fn new(list : Vec<Arc<AxVCpu<AxArchVCpuImpl<H>>>>) -> Self {
         let mut arch_vcpu_list = Vec::new();
 
-        for arch_vcpu in list {
-            let unsafe_cell_vcpu = unsafe { &*arch_vcpu.arch_vcpu.get() };
+        for arch_vcpu_item in list {
+            let unsafe_cell_vcpu = unsafe { &*arch_vcpu_item.get_arch_vcpu() };
             let vcpu = unsafe_cell_vcpu.clone().into();
             arch_vcpu_list.push(vcpu);
         }

@@ -17,6 +17,8 @@ pub use self::pcpu::PerCpu as AxVMArchPerCpuImpl;
 pub use self::vcpu::VCpu as AxArchVCpuImpl;
 pub use vcpu::AxArchVCpuConfig;
 
+mod vgic_impl;
+
 /// context frame for aarch64
 pub type ContextFrame = context_frame::Aarch64ContextFrame;
 
