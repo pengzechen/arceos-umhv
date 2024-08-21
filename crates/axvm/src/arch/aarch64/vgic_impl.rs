@@ -26,6 +26,11 @@ impl<H: AxVMHal> VcpuTrait for VCpu<H> {
 use alloc::vec::Vec;
 use arm_vgic::Vgic;
 use arm_vgic::vint::VgicInt;
+const GIC_SPI_MAX:usize = 1024;
+const GIC_PRIVINT_NUM:usize = 32;
+const GIC_SGIS_NUM:usize = 16;
+
+
 
 pub fn emu_intc_init<V: VcpuTrait + Clone>(base_ipa: usize, length: usize, vcpu_list: &Vec<V>) -> Vgic<V> {
 

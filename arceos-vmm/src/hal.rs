@@ -2,6 +2,7 @@ use axvm::AxVMHal;
 // Todo: should we know about HostPhysAddr and HostVirtAddr here???
 use memory_addr::{PhysAddr, VirtAddr};
 
+#[derive(Clone)]
 pub struct AxVMHalImpl;
 
 impl AxVMHal for AxVMHalImpl {
