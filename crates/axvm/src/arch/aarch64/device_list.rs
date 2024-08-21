@@ -22,7 +22,7 @@ impl<H: AxVMHal> AxArchDeviceList<H> {
             let vcpu = unsafe_cell_vcpu.clone().into();
             arch_vcpu_list.push(vcpu);
         }
-
+        use crate::arch::aarch64::vgic_impl::emu_intc_init;
         Self {
             vgic: emu_intc_init(0x800_0000, 0x4_0000, &arch_vcpu_list),
             _marker: PhantomData,

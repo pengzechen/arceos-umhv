@@ -1,7 +1,7 @@
 use axaddrspace::{HostPhysAddr, HostVirtAddr};
 
 /// The interfaces which the underlying software (kernel or hypervisor) must implement.
-pub trait AxVMHal: Sized {
+pub trait AxVMHal: Sized + core::clone::Clone {
     type PagingHandler: page_table_multiarch::PagingHandler;
 
     // /// Allocates a 4K-sized contiguous physical page, returns its physical address.
