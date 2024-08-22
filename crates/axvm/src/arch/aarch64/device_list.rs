@@ -3,10 +3,12 @@ use alloc::vec::Vec;
 use axerrno::AxResult;
 
 use super::AxArchVCpuImpl;
+use crate::arch::aarch64::vcpu::VCpu;
 use crate::AxVMHal;
 use arm_vgic;
 use alloc::sync::Arc;
 use axvcpu::AxVCpu;
+use emu_dev::EmuContext;
 
 pub struct AxArchDeviceList<H: AxVMHal> {
     vgic: arm_vgic::Vgic<AxArchVCpuImpl<H>>,
@@ -31,9 +33,35 @@ impl<H: AxVMHal> AxArchDeviceList<H> {
 
     pub fn vmexit_handler(
         &self,
-        _arch_vcpu: &mut AxArchVCpuImpl<H>,
-        _exit_reason: axvcpu::AxVCpuExitReason,
+        vcpu: &mut VCpu<H>,
+        exit_reason: & axvcpu::AxVCpuExitReason,
     ) -> AxResult {
+        match exit_reason {
+            axvcpu::AxVCpuExitReason::MmioRead { addr, width , data} => {
+                let emu_ctx = EmuContext{
+                    address: (*addr).into(),
+                    width: (*width).into(),
+                    write: false,
+                    sign_ext: false, // not use 
+                    reg: *data as usize,
+                    reg_width: 0
+                };
+                self.vgic.handler(&emu_ctx, vcpu);
+            },
+            axvcpu::AxVCpuExitReason::MmioWrite { addr, width, data } => {
+                let emu_ctx = EmuContext{
+                    address: (*addr).into(),
+                    width: (*width).into(),
+                    write: true,
+                    sign_ext: false, // not use 
+                    reg: *data as usize,
+                    reg_width: 0
+                };
+                self.vgic.handler(&emu_ctx, vcpu);
+            },
+            _ => (),
+        }
+        
         Ok(())
     }
 }

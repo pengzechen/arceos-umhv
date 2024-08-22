@@ -25,6 +25,7 @@ page_table_entry = { version = "0.3.3", features = ["arm-el2"] }
 page_table_multiarch = "0.3.3"
 percpu = { version = "0.1.4", features = ["arm-el2"] }
 arm_vgic = { path = "../arm_vgic" }
+emu_dev = { path = "../emu_dev" }
 
 # System dependent modules provided by ArceOS-Hypervisor.
 axvcpu = { workspace = true }

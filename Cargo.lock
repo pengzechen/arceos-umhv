@@ -613,6 +613,7 @@ dependencies = [
  "bitflags 2.6.0",
  "cfg-if",
  "cortex-a",
+ "emu_dev",
  "log",
  "memoffset",
  "memory_addr 0.2.1",

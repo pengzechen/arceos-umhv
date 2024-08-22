@@ -33,11 +33,12 @@ pub fn data_abort_handler(context_frame: &mut ContextFrame) -> AxResult<AxVCpuEx
         return Ok(AxVCpuExitReason::MmioWrite {
             addr: address,
             width: access_width,
-            data: context_frame.gpr(reg) as u64,
+            data: reg as u64    // change from data to reg
         });
     }
     Ok(AxVCpuExitReason::MmioRead {
         addr: address,
         width: access_width,
+        data: reg as u64,
     })
 }

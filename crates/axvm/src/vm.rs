@@ -230,12 +230,21 @@ impl<H: AxVMHal> AxVM<H> {
 
             trace!("{exit_reason:#x?}");
             let handled = match &exit_reason {
-                AxVCpuExitReason::MmioRead { addr: _, width: _ } => true,
+                AxVCpuExitReason::MmioRead { addr: a, width: w , data: d} => {
+                    // let devs = self.get_device_list();
+                    // devs.vmexit_handler(vcpu.arch_vcpu, exit_reason);
+                    true
+                }
                 AxVCpuExitReason::MmioWrite {
-                    addr: _,
-                    width: _,
-                    data: _,
-                } => true,
+                    addr: a,
+                    width: w,
+                    data: d,
+                } => {
+                    let devs = self.get_device_list();
+                    let arch_vcpu = vcpu.get_arch_vcpu();
+                    devs.vmexit_handler(arch_vcpu, & exit_reason);
+                    true
+                }
                 AxVCpuExitReason::IoRead { port: _, width: _ } => true,
                 AxVCpuExitReason::IoWrite {
                     port: _,
@@ -249,6 +258,7 @@ impl<H: AxVMHal> AxVM<H> {
                     .handle_page_fault(*addr, *access_flags),
                 _ => false,
             };
+
             if !handled {
                 break exit_reason;
             }
