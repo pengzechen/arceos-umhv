@@ -231,8 +231,9 @@ impl<H: AxVMHal> AxVM<H> {
             trace!("{exit_reason:#x?}");
             let handled = match &exit_reason {
                 AxVCpuExitReason::MmioRead { addr: a, width: w , data: d} => {
-                    // let devs = self.get_device_list();
-                    // devs.vmexit_handler(vcpu.arch_vcpu, exit_reason);
+                    let devs = self.get_device_list();
+                    let arch_vcpu = vcpu.get_arch_vcpu();
+                    devs.vmexit_handler(arch_vcpu, & exit_reason);
                     true
                 }
                 AxVCpuExitReason::MmioWrite {
