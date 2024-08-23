@@ -59,6 +59,9 @@ pub fn emu_intc_init<V: VcpuTrait + Clone>(base_ipa: usize, length: usize, vcpu_
         vgic.cpu_priv.push(cpu_priv);
     }
 
+    for i in 0..GIC_SPI_MAX {
+        vgic.set_vgic_hw_int(vcpu_list, i);
+    }
     
     vgic
 }

@@ -1,11 +1,11 @@
 id = 1
-name = "nimbos"
+name = "testos"
 vm_type = 1
 cpu_set = 2
 entry_point = 0x4008_0000
 # bios_path = ""
 # bios_load_addr = 0
-kernel_path = "nimbos-aarch64.bin"
+kernel_path = "testos-aarch64.bin"
 kernel_load_addr = 0x4008_0000
 # ramdisk_path = ""
 # ramdisk_load_addr = 0
@@ -16,6 +16,4 @@ memory_regions = [
     [0x800_0000, 0x10_000, 0x17],     # intc 		    4K  0b10111 R|W|DEVICE
     [0x804_0000, 0x10_000, 0x17],     # intc 		    4K  0b10111 R|W|DEVICE  # 这里直接使用gicv
     [0x900_0000, 0x1000, 0x17],       # pl011 (Uart)	4K  0b10111 R|W|DEVICE
-    [0x901_0000, 0x1000, 0x17],       # pl031 (timer)	4K  0b10111 R|W|DEVICE
-    [0xfed0_0000, 0x1000, 0x17],      # HPET 		    4K  0b10111 R|W|DEVICE
 ]
